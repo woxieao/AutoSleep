@@ -1,7 +1,6 @@
 D:\Data\Github\AutoSleep\bin\Debug\Audio\0.wav
 D:\Data\Github\AutoSleep\bin\Debug\Audio\1.wav
 D:\Data\Github\AutoSleep\bin\Debug\Audio\2.wav
-D:\Data\Github\AutoSleep\bin\Debug\App.config
 D:\Data\Github\AutoSleep\bin\Debug\AutoSleep.exe.config
 D:\Data\Github\AutoSleep\bin\Debug\AutoSleep.exe
 D:\Data\Github\AutoSleep\bin\Debug\AutoSleep.pdb

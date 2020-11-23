@@ -57,7 +57,8 @@ namespace AutoSleep
                 Log.Add(currentMinute);
                 Prompter.SendMsg2User(MsgType.Warning);
             }
-            if (currentMinuteTimeSpan >= Config.SleepTime)
+            //避免时间设置成了00:00无限关机
+            if (currentMinuteTimeSpan >= Config.SleepTime && currentMinuteTimeSpan <= new TimeSpan(6, 0, 0))
             {
                 Prompter.SendMsg2User(MsgType.Sleep);
                 Shutdown();
