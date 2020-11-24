@@ -5,7 +5,7 @@ namespace AutoSleep.Models
 {
     public class Config
     {
-        public static TimeSpan SleepTime = TimeSpan.TryParse(ConfigurationManager.AppSettings[nameof(SleepTime)], out var sleepTime)
+        public static TimeSpan SleepTime => TimeSpan.TryParse(ConfigurationManager.AppSettings[nameof(SleepTime)], out var sleepTime)
             ? sleepTime
             : new TimeSpan(23, 0, 0);
 
