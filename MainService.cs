@@ -30,8 +30,8 @@ namespace AutoSleep
 
         protected override void OnStop()
         {
-            Shutdown();
             ProcessProtection.Unprotect();
+            Shutdown();
         }
 
         void Shutdown()
@@ -39,31 +39,49 @@ namespace AutoSleep
             Process.Start("shutdown", "/h /f");
         }
 
-        private static readonly List<DateTime> Log = new List<DateTime>();
-        private void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        void Trigger()
         {
             var nowTime = DateTime.Now;
             var currentMinute = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, nowTime.Hour, nowTime.Minute, 0);
 
-            var currentMinuteTimeSpan = currentMinute.TimeOfDay;
+            var deadline = DateTime.Today.Add(Config.SleepTime);
+            //小于明天6点算作今天
+            var nextDayStartTime = new TimeSpan(5, 59, 59);
+            if (Config.SleepTime <= nextDayStartTime && nowTime.TimeOfDay > nextDayStartTime)
+            {
+                deadline = deadline.AddDays(1);
+            }
 
-            if (currentMinuteTimeSpan == Config.NoticeTime && Log.All(i => i != currentMinute))
+            var noticeTime = deadline.AddMinutes(-60);
+            var warningTime = deadline.AddMinutes(-30);
+
+            if (currentMinute == noticeTime && Log.All(i => i != currentMinute))
             {
                 Log.Add(currentMinute);
                 Prompter.SendMsg2User(MsgType.Notice);
             }
-            if (currentMinuteTimeSpan == Config.WarningTime && Log.All(i => i != currentMinute))
+            if (currentMinute == warningTime && Log.All(i => i != currentMinute))
             {
                 Log.Add(currentMinute);
                 Prompter.SendMsg2User(MsgType.Warning);
             }
-            //避免时间设置成了00:00无限关机
-            if (currentMinuteTimeSpan >= Config.SleepTime && currentMinuteTimeSpan <= new TimeSpan(6, 0, 0))
+
+            #region 触发关机
+
+            var timeDiff = currentMinute - deadline;
+            if (timeDiff <= TimeSpan.FromHours(1) && timeDiff > TimeSpan.FromHours(0))
             {
                 Prompter.SendMsg2User(MsgType.Sleep);
                 Shutdown();
             }
 
+            #endregion
+        }
+
+        private static readonly List<DateTime> Log = new List<DateTime>();
+        private void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Trigger();
         }
     }
 
