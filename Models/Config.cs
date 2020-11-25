@@ -10,6 +10,7 @@ namespace AutoSleep.Models
             : new TimeSpan(23, 0, 0);
 
 
-        public static readonly string ServicesRootPath = ConfigurationManager.AppSettings[nameof(ServicesRootPath)];
+        public static readonly string AudioFilePath = ConfigurationManager.AppSettings[nameof(AudioFilePath)];
+        public static readonly string SyncTimeApiUrl = ConfigurationManager.AppSettings[nameof(SyncTimeApiUrl)];
     }
 }

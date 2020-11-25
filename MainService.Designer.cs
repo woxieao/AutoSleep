@@ -35,11 +35,14 @@ namespace AutoSleep
             // timer
             // 
             this.timer.Enabled = true;
-            this.timer.Interval = 200D;
+            this.timer.Interval = 10000D;
             this.timer.Elapsed += new System.Timers.ElapsedEventHandler(this.timer_Elapsed);
             // 
             // MainService
             // 
+            this.CanHandlePowerEvent = true;
+            this.CanHandleSessionChangeEvent = true;
+            this.CanStop = false;
             this.ServiceName = "Service1";
             ((System.ComponentModel.ISupportInitialize)(this.timer)).EndInit();
 

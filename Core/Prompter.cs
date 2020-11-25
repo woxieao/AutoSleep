@@ -23,7 +23,7 @@ namespace AutoSleep.Core
         static readonly IntPtr WTS_CURRENT_SERVER_HANDLE = IntPtr.Zero;
 
 
-        private static void Alert(string msg, string title )
+        private static void Alert(string msg, string title)
         {
 
             for (var userSession = 10; userSession > 0; userSession--)
@@ -93,17 +93,14 @@ namespace AutoSleep.Core
             SND_SYSTEM = 0x00200000 /* Treat this as a system sound */
         }
 
-        private static readonly string TempFilePath = Config.ServicesRootPath + "\\Temp";
-        private static readonly string AudioFilePath = Config.ServicesRootPath + "\\Audio";
-
         private static void PlaySound(MsgType msgType)
         {
-            PlaySound($"{AudioFilePath}\\{(int)msgType}.wav", new System.IntPtr(), PlaySoundFlags.SND_ASYNC | PlaySoundFlags.SND_SYSTEM);
+            PlaySound($"{Config.AudioFilePath}\\{(int)msgType}.wav", new IntPtr(), PlaySoundFlags.SND_ASYNC | PlaySoundFlags.SND_SYSTEM);
         }
 
         public static void SendMsg2User(MsgType msgType)
         {
-            Alert(msgType.GetDescription(), "少年郎");
+            Alert(msgType.GetDescription(), "身体重要啊喂~");
             PlaySound(msgType);
         }
     }

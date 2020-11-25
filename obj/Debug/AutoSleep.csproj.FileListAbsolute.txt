@@ -18,3 +18,5 @@ D:\Data\Github\AutoSleep\obj\Debug\AutoSleep.csproj.CopyComplete
 D:\Data\Github\AutoSleep\obj\Debug\AutoSleep.exe
 D:\Data\Github\AutoSleep\obj\Debug\AutoSleep.pdb
 D:\Data\Github\AutoSleep\obj\Debug\AutoSleep.csprojAssemblyReference.cache
+D:\Data\Github\AutoSleep\bin\Debug\Newtonsoft.Json.dll
+D:\Data\Github\AutoSleep\bin\Debug\Newtonsoft.Json.xml
